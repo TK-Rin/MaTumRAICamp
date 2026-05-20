@@ -1,11 +1,16 @@
-def calculate_weight(items):
-    total_weight = 0
-    
-    for item in items:
-        total_weight = total_weight + item
-        
-    return total_weight
+tables_to_serve = [4, 7, 2, 9]
+battery = 30
 
-scavenged_parts = [10, 5, 20, 2]
-final_weight = calculate_weight(scavenged_parts)
-print("Total Cargo Weight:", final_weight)
+for table in tables_to_serve:
+    if battery > 10:
+        print("Serving table number", table)
+        battery = battery - 10
+    else:
+        print("Battery too low! Cannot serve table", table)
+
+print("Final battery level:", battery)
+
+print("Heading to charging station...")
+while battery < 50:
+    battery = battery + 10
+    print("Charging... Battery at:", battery)

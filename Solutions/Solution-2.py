@@ -1,10 +1,10 @@
-base_energy = 50
-distance_km = 12
-energy_per_km = 3.5
+def calculate_time(distance, speed):
+    delivery_time = distance / speed
+    rounded_time = round(delivery_time, 2)
+    return rounded_time
 
-trip_energy = distance_km * energy_per_km
-total_energy = base_energy + trip_energy
-energy_remaining = 100 - total_energy 
+table_distance = 15.5 
+teenoi_speed = 1.2 
 
-print("Total Energy Needed:", total_energy)
-print("Energy Remaining:", energy_remaining)
+time_to_table = calculate_time(table_distance, teenoi_speed)
+print("Time to deliver: ", time_to_table, "seconds")
