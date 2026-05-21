@@ -1,9 +1,13 @@
+# --- EXERCISE: TEENOI'S STATE MACHINE DEBUGGING ---
+# GOAL: Fix the 4 bugs so Teenoi can finish all 3 deliveries and power off!
+
 state = "IDLE"
 battery = 50
 orders_left = 3
 
 print("Booting up Teenoi...")
 
+# The main system loop keeps running until the state is POWER_OFF
 while state != "POWER_OFF":
     
     if state == "IDLE":
@@ -14,30 +18,28 @@ while state != "POWER_OFF":
             print("All orders finished. Shutting down.")
             state = "POWER_OFF"
             
-    # FIX 1: Changed '=' (assignment) to '==' (comparison). 
-    # We are checking the state, not changing it.
-    elif state == "DELIVERING":
+    # BUG 1: Syntax error here! Look closely at the comparison.
+    elif state = "DELIVERING":
         print("Delivering food...")
         orders_left = orders_left - 1
         battery = battery - 25
         print("Order complete! Battery left:", battery)
         
-        # FIX 2: Changed state transition to "LOW_BATTERY". 
-        # The robot must know to go charge before taking another order.
+        # BUG 2: Logic error! If battery is 25 or less, we need to transition 
+        # to the charging state, not go back to idle.
         if battery <= 25:
             print("Warning: Battery low!")
-            state = "LOW_BATTERY" 
+            state = "IDLE" 
         else:
             state = "IDLE"
 
-    # FIX 3: Added the missing colon (:) at the end of the elif statement.
-    elif state == "LOW_BATTERY":
+    # BUG 3: Syntax error! What punctuation is missing at the end of this line?
+    elif state == "LOW_BATTERY"
         print("Returning to dock to charge...")
         
-        # FIX 4: Added logic to refill the battery variable AND transition 
-        # the state back to IDLE so the loop can continue normally.
+        # BUG 4: Logic error! Teenoi never actually recharges, and never leaves 
+        # this state. This causes an infinite loop! Add code to fix this.
         print("Charging...")
-        battery = 100
-        state = "IDLE"
+        
         
 print("System offline. Great job debugging!")
