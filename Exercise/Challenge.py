@@ -1,31 +1,39 @@
-# --- FINAL CHALLENGE: TEENOI'S FULL SHIFT ---
+# ==========================================
+# FINAL CHALLENGE — FULL CONNECTED FSM
+# ==========================================
 
-# 1. Ask user to name the robot
-robot_name = _____
+# ==========================================
+#     Objectives
+# ==========================================
+# Combine all workshop concepts into one program
+# Understand how FSM controls robot behavior
+# Apply variables, loops, conditions, and functions together
+# Build and modify a complete robot system
 
-# 2. Define a function to process deliveries
-def run_deliveries(orders, starting_battery):
-    current_battery = starting_battery
-    
-    # 3. Loop through the orders list
-    for _____ in _____:
-        
-        # 4. Logic: If battery is 0, break the loop and print a warning
-        if __________:
-            print("CRITICAL: Out of battery! Stopping.")
-            _____ # Use this keyword to exit the loop early
-            
-        print(robot_name, "is delivering to table", order)
-        # 5. Decrease battery by 15 per delivery
-        current_battery = ____________
-        
-    return current_battery
+# ==========================================
+# Topics Included
+# ==========================================
+# Variables
+# Input
+# Functions
+# While Loops
+# If-Else
+# FSM
+# Program Flow
+# State Transitions
 
-# --- EXECUTION ---
-# 6. Create a list of 4 table numbers
-table_orders = [___, ___, ___, ___]
+# ==========================================
+# Scenario
+# ==========================================
+# Build a complete FSM food delivery robot system.
 
-# 7. Call the function with a starting battery of 50 and save the result
-final_battery = run_deliveries(________, 50)
+# The robot must:
 
-print("Shift complete. Remaining battery:", final_battery)
+# Wait for food loading
+# Wait for table confirmation
+# Navigate to the table
+# Detect obstacles
+# Continue when path is clear
+# Wait for customer pickup
+# Decide whether to serve another table
+# Return home
