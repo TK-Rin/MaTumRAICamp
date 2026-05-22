@@ -1,10 +1,31 @@
-def calculate_time(distance, speed):
-    delivery_time = distance / speed
-    rounded_time = round(delivery_time, 2)
-    return rounded_time
+# ==========================================
+# EXERCISE 2 — SOLUTION
+# ==========================================
 
-table_distance = 15.5 
-teenoi_speed = 1.2 
+def ask(question):
 
-time_to_table = calculate_time(table_distance, teenoi_speed)
-print("Time to deliver: ", time_to_table, "seconds")
+    answer = input(question + " (yes/no): ")
+
+    answer = answer.strip().lower()
+
+    return answer == "yes"
+
+
+def change_state(new_state):
+
+    print("State changed to:", new_state)
+
+    return new_state
+
+
+# ==========================================
+# TEST AREA
+# ==========================================
+
+current_state = "Idle"
+
+if ask("Has the food been loaded?"):
+
+    current_state = change_state("Waiting")
+
+print("Current State:", current_state)

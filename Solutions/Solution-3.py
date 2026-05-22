@@ -1,43 +1,79 @@
-state = "IDLE"
-battery = 50
-orders_left = 3
+# ==========================================
+# EXERCISE 3 — SOLUTION
+# ==========================================
 
-print("Booting up Teenoi...")
+def ask(question):
 
-while state != "POWER_OFF":
-    
-    if state == "IDLE":
-        if orders_left > 0:
-            print("New order received! Changing state to DELIVERING.")
-            state = "DELIVERING"
-        else:
-            print("All orders finished. Shutting down.")
-            state = "POWER_OFF"
-            
-    # FIX 1: Changed '=' (assignment) to '==' (comparison). 
-    # We are checking the state, not changing it.
-    elif state == "DELIVERING":
-        print("Delivering food...")
-        orders_left = orders_left - 1
-        battery = battery - 25
-        print("Order complete! Battery left:", battery)
-        
-        # FIX 2: Changed state transition to "LOW_BATTERY". 
-        # The robot must know to go charge before taking another order.
-        if battery <= 25:
-            print("Warning: Battery low!")
-            state = "LOW_BATTERY" 
-        else:
-            state = "IDLE"
+    answer = input(question + " (yes/no): ")
 
-    # FIX 3: Added the missing colon (:) at the end of the elif statement.
-    elif state == "LOW_BATTERY":
-        print("Returning to dock to charge...")
-        
-        # FIX 4: Added logic to refill the battery variable AND transition 
-        # the state back to IDLE so the loop can continue normally.
-        print("Charging...")
-        battery = 100
-        state = "IDLE"
-        
-print("System offline. Great job debugging!")
+    answer = answer.strip().lower()
+
+    return answer == "yes"
+
+
+def change_state(new_state):
+
+    print("State changed to:", new_state)
+
+    return new_state
+
+
+current_state = "Idle"
+
+
+while True:
+
+    if current_state == "Idle":
+
+        print("Robot is idle.")
+
+        if ask("Has the food been loaded?"):
+
+            current_state = change_state("Waiting")
+
+
+    elif current_state == "Waiting":
+
+        print("Waiting for table confirmation.")
+
+        if ask("Is the table confirmed?"):
+
+            current_state = change_state("Navigating")
+
+
+    elif current_state == "Navigating":
+
+        print("Robot is navigating.")
+
+        if ask("Is there an obstacle?"):
+
+            current_state = change_state("Obstacle")
+
+        elif ask("Has robot arrived?"):
+
+            current_state = change_state("Delivering")
+
+
+    elif current_state == "Obstacle":
+
+        print("Waiting for obstacle to clear.")
+
+        if ask("Obstacle cleared?"):
+
+            current_state = change_state("Navigating")
+
+
+    elif current_state == "Delivering":
+
+        print("Waiting for customer pickup.")
+
+        if ask("Food picked up?"):
+
+            current_state = change_state("Success")
+
+
+    elif current_state == "Success":
+
+        print("Delivery completed.")
+
+        break

@@ -1,45 +1,78 @@
-# --- EXERCISE: TEENOI'S STATE MACHINE DEBUGGING ---
-# GOAL: Fix the 4 bugs so Teenoi can finish all 3 deliveries and power off!
+# ==========================================
+# EXERCISE 3 — FIX THE FSM
+# ==========================================
 
-state = "IDLE"
-battery = 50
-orders_left = 3
+def ask(question)
+    answer = input(question + " (yes/no): ")
 
-print("Booting up Teenoi...")
+    answer = answer.strip().lower()
 
-# The main system loop keeps running until the state is POWER_OFF
-while state != "POWER_OFF":
-    
-    if state == "IDLE":
-        if orders_left > 0:
-            print("New order received! Changing state to DELIVERING.")
-            state = "DELIVERING"
-        else:
-            print("All orders finished. Shutting down.")
-            state = "POWER_OFF"
-            
-    # BUG 1: Syntax error here! Look closely at the comparison.
-    elif state = "DELIVERING":
-        print("Delivering food...")
-        orders_left = orders_left - 1
-        battery = battery - 25
-        print("Order complete! Battery left:", battery)
-        
-        # BUG 2: Logic error! If battery is 25 or less, we need to transition 
-        # to the charging state, not go back to idle.
-        if battery <= 25:
-            print("Warning: Battery low!")
-            state = "IDLE" 
-        else:
-            state = "IDLE"
+    return answer == yes
 
-    # BUG 3: Syntax error! What punctuation is missing at the end of this line?
-    elif state == "LOW_BATTERY"
-        print("Returning to dock to charge...")
-        
-        # BUG 4: Logic error! Teenoi never actually recharges, and never leaves 
-        # this state. This causes an infinite loop! Add code to fix this.
-        print("Charging...")
-        
-        
-print("System offline. Great job debugging!")
+
+def change_state(new_state):
+
+print("State changed to:", new_state)
+
+    return state
+
+
+current_state = "Idle"
+
+
+while True
+
+    if current_state == "Idle":
+
+        print("Robot is idle.")
+
+        if ask("Has the food been loaded?"):
+
+            current_state = change_state("Waiting")
+
+
+    elif current_state = "Waiting":
+
+        print("Waiting for table confirmation.")
+
+        if ask("Is the table confirmed?")
+
+            current_state = change_state("Navigating")
+
+
+    elif current_state == "Navigating":
+
+        print("Robot is navigating.")
+
+        if ask("Is there an obstacle?"):
+
+            current_state = change_state("Obstacle")
+
+        elif ask("Has robot arrived?"):
+
+            current_state = change_state("Delivering")
+
+
+    elif current_state == "Obstacle":
+
+        print("Waiting for obstacle to clear.")
+
+        if ask("Obstacle cleared?"):
+
+            current_state = change_state("Navigating")
+
+
+    elif current_state == "Delivering":
+
+        print("Waiting for customer pickup.")
+
+        if ask("Food picked up?"):
+
+            current_state = change_state("Success")
+
+
+    elif current_state == "Success":
+
+        print("Delivery completed.")
+
+        break
